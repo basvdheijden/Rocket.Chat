@@ -29,4 +29,16 @@ Meteor.startup(() => {
 			lng: user.language || RocketChat.settings.get('language') || 'en'
 		}));
 	}, RocketChat.callbacks.priority.LOW);
+
+	RocketChat.callbacks.add('afterSaveMessage', function(message, room) {
+		// if type if not livechat, bail out.
+		//t: 'l'
+
+		var keywords = RocketChat.models.FAQItems.keywords(message.msg);
+		var items = RocketChat.models.FAQItems.query(keywords);
+
+		if (items) RocketChat.models.FAQItems.set(items, message, room);
+
+		return message;
+	}, RocketChat.callbacks.priority.HIGH, 'getFAQItems');
 });

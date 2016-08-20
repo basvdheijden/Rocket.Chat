@@ -62,6 +62,7 @@ Package.onUse(function(api) {
 	api.addFiles('client/collections/LivechatQueueUser.js', 'client');
 	api.addFiles('client/collections/LivechatTrigger.js', 'client');
 	api.addFiles('client/collections/LivechatInquiry.js', 'client');
+	api.addFiles('client/collections/FAQItems.js', 'client');
 
 	api.addFiles('client/methods/changeLivechatStatus.js', 'client');
 
@@ -161,6 +162,7 @@ Package.onUse(function(api) {
 	api.addFiles('server/models/LivechatTrigger.js', 'server');
 	api.addFiles('server/models/indexes.js', 'server');
 	api.addFiles('server/models/LivechatInquiry.js', 'server');
+	api.addFiles('server/models/FAQItems.js', ['client', 'server']);
 
 	// server lib
 	api.addFiles('server/lib/Livechat.js', 'server');
@@ -183,6 +185,7 @@ Package.onUse(function(api) {
 	api.addFiles('server/publications/visitorInfo.js', 'server');
 	api.addFiles('server/publications/visitorPageVisited.js', 'server');
 	api.addFiles('server/publications/livechatInquiries.js', 'server');
+	api.addFiles('server/publications/faqItems.js', 'server');
 
 	// api
 	api.addFiles('server/api.js', 'server');
