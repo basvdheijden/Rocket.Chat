@@ -1,37 +1,47 @@
 <template name="livechatWindow">
-	{{#if livechatStarted}}
-		<div class="livechat-room">
-			<div class="title" style="background-color:{{color}}; color: {{fontColor}}">
-				<div class="toolbar">
-					&nbsp;
-					{{#if soundActive}}
-						<i class="sound icon-bell-alt" title="Toggle notification sound"></i>
-					{{else}}
-						<i class="sound icon-bell-off" title="toggle notification sound"></i>
-					{{/if}}
+  {{#if livechatStarted}}
+    <div class="livechat-room">
+      <div class="title" style="background-color:{{color}}; color: {{fontColor}}">
+        <div class="toolbar">
+          &nbsp;
+          {{#if soundActive}}
+            <i class="sound icon-bell-alt" title="Toggle notification sound"></i>
+          {{else}}
+            <i class="sound icon-bell-off" title="toggle notification sound"></i>
+          {{/if}}
 
-					{{#unless popoutActive}}
-						<i class="popout icon-link-ext" title="Open in a new window"></i>
-					{{/unless}}
-				</div>
-				<h1>{{title}}</h1>
-			</div>
+          {{#unless popoutActive}}
+            <i class="popout icon-link-ext" title="Open in a new window"></i>
+          {{/unless}}
+        </div>
+        <h1>{{title}}</h1>
+      </div>
 
-			{{> faq}}
+      {{> faq}}
 
-			{{#if livechatOnline}}
-				{{#if showRegisterForm}}
-					{{> register}}
-				{{else}}
-					{{> messages}}
-				{{/if}}
-			{{else}}
-				<div class="offline">
-					{{> offlineForm (offlineData)}}
-				</div>
-			{{/if}}
+      {{#if chatInitialized}}
+        {{#if livechatOnline}}
+          {{#if showRegisterForm}}
+            {{> register}}
+          {{else}}
+            {{> messages}}
+          {{/if}}
+        {{else}}
+          <div class="offline">
+            {{> offlineForm (offlineData)}}
+          </div>
+        {{/if}}
+      {{else}}
+        <h2>Staat uw vraag er niet bij?</h2>
+        {{#if livechatOnline}}
+          <a class="init-chat" href="#">Chat met een medewerker</a>
+        {{/if}}
+        <a href="#">Ga naar de contactpagina</a>
 
-			{{> poweredBy }}
-		</div>
-	{{/if}}
+        {{> questionForm}}
+      {{/if}}
+
+      {{> poweredBy }}
+    </div>
+  {{/if}}
 </template>

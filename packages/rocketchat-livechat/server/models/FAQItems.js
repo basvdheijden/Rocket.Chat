@@ -19,19 +19,20 @@ class FAQItems extends RocketChat.models._Base {
     return [message, 'kip', 'ei', new Date()];
   }
 
-  set(items, message, room) {
+  set(items, token, message, room) {
     if (!items.length) return;
 
-    super.remove({rid: room._id});
+    super.remove({'visitor': token});
 
     items.forEach(function(item) {
       var faqItem = {
         text: item.text,
         url: item.url,
-        rid: room._id,
+        rid: room ? room._id : null,
         ts: new Date(),
-        u: message.u,
-        msgid: message._id
+        u: message ? message.u : {},
+        msgid: message ? message._id : null,
+        visitor: token
       };
 
       super.insert(faqItem);

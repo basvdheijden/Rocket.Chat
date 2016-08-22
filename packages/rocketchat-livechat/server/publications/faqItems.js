@@ -1,10 +1,6 @@
-Meteor.publish('livechat:FAQItems', function(roomId) {
-  if (!this.userId) {
-    return this.error(new Meteor.Error('error-not-authorized', 'Not authorized', { publish: 'livechat:FAQItems' }));
-  }
-
+Meteor.publish('livechat:FAQItems', function(token) {
   return RocketChat.models.FAQItems.find({
-    "u._id": this.userId
+    visitor: token
   }, {
     fields: {
       text: 1,
