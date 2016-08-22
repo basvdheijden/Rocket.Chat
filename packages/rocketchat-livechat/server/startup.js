@@ -31,8 +31,11 @@ Meteor.startup(() => {
 	}, RocketChat.callbacks.priority.LOW);
 
 	RocketChat.callbacks.add('afterSaveMessage', function(message, room) {
-		// if type if not livechat, bail out.
-		//t: 'l'
+    // If this is not a livechat
+    // Or if the user is an agent, bail out.
+    if (room.t !== 'l' || RocketChat.models.Users.isUserInRole('livechat-agent')) {
+      return message;
+    }
 
 		var keywords = RocketChat.models.FAQItems.keywords(message.msg);
 		var items = RocketChat.models.FAQItems.query(keywords);
