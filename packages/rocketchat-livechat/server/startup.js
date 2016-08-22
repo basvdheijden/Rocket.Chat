@@ -33,7 +33,7 @@ Meteor.startup(() => {
 	RocketChat.callbacks.add('afterSaveMessage', function(message, room) {
     // If this is not a livechat
     // Or if the user is an agent, bail out.
-    if (room.t !== 'l' || RocketChat.models.Users.isUserInRole('livechat-agent')) {
+    if (room.t !== 'l' || RocketChat.models.Users.isUserInRole(Meteor.userId, 'livechat-agent')) {
       return message;
     }
 
