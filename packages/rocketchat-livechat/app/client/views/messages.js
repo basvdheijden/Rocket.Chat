@@ -88,7 +88,7 @@ Template.messages.onCreated(function() {
 		}
 	});
 
-	Meteor.setInterval(() => {
+	var refresh = () => {
 		Meteor.call('livechat:getInitialData', visitor.getToken(), (err, result) => {
 			if (result && result.room && result.room.servedBy && result.room.servedBy.name) {
 				this.servedBy.set(result.room.servedBy.name);
@@ -97,7 +97,10 @@ Template.messages.onCreated(function() {
 				this.servedBy.set(false);
 			}
 		});
-	}, 1000);
+	};
+
+	refresh();
+	Meteor.setInterval(refresh, 3000);
 });
 
 Template.messages.onRendered(function() {

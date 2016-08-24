@@ -21,17 +21,11 @@
         {{> faq}}
       {{/if}}
 
-      {{#if chatInitialized}}
-        {{#if livechatOnline}}
-          {{#if showRegisterForm}}
-            {{> register}}
-          {{else}}
-            {{> messages}}
-          {{/if}}
+      {{#if chatting}}
+        {{#if showRegisterForm}}
+          {{> register}}
         {{else}}
-          <div class="offline">
-            {{> offlineForm (offlineData)}}
-          </div>
+          {{> messages}}
         {{/if}}
       {{else}}
         {{#if questionAsked}}
