@@ -23,12 +23,20 @@ Meteor.methods({
 				cl: 1,
 				u: 1,
 				usernames: 1,
-				v: 1
+				v: 1,
+				servedBy: 1
 			}
 		}).fetch();
 
 		if (room && room.length > 0) {
 			info.room = room[0];
+
+			if (info.room.servedBy._id) {
+				var userInfo = RocketChat.models.Users.findOne(info.room.servedBy._id);
+				if (userInfo) {
+					info.room.servedBy.name = userInfo.name;
+				}
+			}
 		}
 
 		const initSettings = RocketChat.Livechat.getInitSettings();

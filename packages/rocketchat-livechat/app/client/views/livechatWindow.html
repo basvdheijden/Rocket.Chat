@@ -17,7 +17,9 @@
         <h1>{{title}}</h1>
       </div>
 
-      {{> faq}}
+      {{#if questionAsked}}
+        {{> faq}}
+      {{/if}}
 
       {{#if chatInitialized}}
         {{#if livechatOnline}}
@@ -32,11 +34,15 @@
           </div>
         {{/if}}
       {{else}}
-        <h2>Staat uw vraag er niet bij?</h2>
-        {{#if livechatOnline}}
-          <a class="init-chat" href="#">Chat met een medewerker</a>
+        {{#if questionAsked}}
+          <h2>Staat uw vraag er niet bij?</h2>
+          {{#if livechatOnline}}
+            <a class="init-chat" href="#">Chat met een medewerker</a>
+          {{/if}}
+          <a href="#">Ga naar de contactpagina</a>
+
+          <span>of stel een nieuwe vraag:</span>
         {{/if}}
-        <a href="#">Ga naar de contactpagina</a>
 
         {{> questionForm}}
       {{/if}}

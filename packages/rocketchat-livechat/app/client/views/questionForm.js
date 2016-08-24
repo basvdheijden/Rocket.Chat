@@ -1,6 +1,8 @@
 let sendMessage = function(event, instance) {
-  let message = instance.find('.input-message').value;
-  Meteor.call('askQuestion', message, visitor.getToken());
+  let message = instance.find('.input-message');
+  Meteor.call('askQuestion', message.value, visitor.getToken());
+  $(message).val('').focus();
+  Session.set('questionAsked', true);
 };
 
 Template.questionForm.events({

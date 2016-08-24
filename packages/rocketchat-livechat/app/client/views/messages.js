@@ -24,6 +24,9 @@ Template.messages.helpers({
 		} else {
 			return t('Options');
 		}
+	},
+	chatOperator() {
+		return Template.instance().servedBy.get();
 	}
 });
 
@@ -60,6 +63,8 @@ Template.messages.onCreated(function() {
 
 	this.showOptions = new ReactiveVar(false);
 
+	this.servedBy = new ReactiveVar(false);
+
 	this.updateMessageInputHeight = function(input) {
 		// Inital height is 28. If the scrollHeight is greater than that( we have more text than area ),
 		// increase the size of the textarea. The max-height is set at 200
@@ -82,6 +87,17 @@ Template.messages.onCreated(function() {
 			this.showOptions.set(false);
 		}
 	});
+
+	Meteor.setInterval(() => {
+		Meteor.call('livechat:getInitialData', visitor.getToken(), (err, result) => {
+			if (result && result.room && result.room.servedBy && result.room.servedBy.name) {
+				this.servedBy.set(result.room.servedBy.name);
+			}
+			else {
+				this.servedBy.set(false);
+			}
+		});
+	}, 1000);
 });
 
 Template.messages.onRendered(function() {

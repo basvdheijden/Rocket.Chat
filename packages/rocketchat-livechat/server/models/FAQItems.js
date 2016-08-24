@@ -22,8 +22,6 @@ class FAQItems extends RocketChat.models._Base {
   set(items, token, message, room) {
     if (!items.length) return;
 
-    super.remove({'visitor': token});
-
     items.forEach(function(item) {
       var faqItem = {
         text: item.text,

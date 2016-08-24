@@ -1,6 +1,29 @@
 Template.faqItems.helpers({
   faqItems() {
-    return FAQItems.find();
+    const token = Template.instance().visitorToken.get();
+
+    return FAQItems.find({
+      visitor: token
+    }).map(function(item) {
+      var message = ChatMessage.findOne({
+        _id: item.msgid
+      }, {
+        fields: { msg: 1 }
+      });
+
+      if (message) {
+        item.truncated = false;
+
+        if (message.msg.length > 20) {
+          message.msg = message.msg.substr(0, 20);
+          item.truncated = true;
+        }
+
+        item.message = message.msg;
+      }
+
+      return item;
+    });
   }
 });
 
@@ -8,8 +31,7 @@ Template.faqItems.onCreated(function() {
   this.visitorToken = new ReactiveVar(null);
   this.user = new ReactiveVar();
 
-  var currentData = Template.currentData();
-
+  let currentData = Template.currentData();
   if (currentData && currentData.rid) {
     this.autorun(() => {
       let room = ChatRoom.findOne(currentData.rid);
@@ -24,7 +46,5 @@ Template.faqItems.onCreated(function() {
     this.subscribe('livechat:visitorInfo', { rid: currentData.rid });
   }
 
-  this.autorun(() => {
-    this.subscribe('livechat:FAQItems', this.visitorToken.get());
-  });
+  this.subscribe('livechat:FAQItems', this.visitorToken.get());
 });

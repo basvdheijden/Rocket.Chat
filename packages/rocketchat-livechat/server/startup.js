@@ -42,6 +42,7 @@ Meteor.startup(() => {
       var items = RocketChat.models.FAQItems.query(keywords);
 
       if (items) {
+        RocketChat.models.FAQItems.remove({visitor: room.v.token, msgid: {'$ne': null}});
         RocketChat.models.FAQItems.set(items, room.v.token, message, room);
       }
     }

@@ -1,4 +1,8 @@
 <template name="messages">
+  {{#if chatOperator}}
+    <h2>U chat met: {{chatOperator}}</h2>
+  {{/if}}
+
 	<div class="messages">
 		<div class="wrapper">
 			<ul>

@@ -40,6 +40,11 @@ Template.livechatWindow.helpers({
   },
   chatInitialized() {
     return visitor.getRoom() !== null || Session.get('chatInitialized');
+  },
+  questionAsked() {
+    return !!Session.get('questionAsked') || FAQItems.find({
+      msgid: null
+    }).count();
   }
 });
 
@@ -119,4 +124,6 @@ Template.livechatWindow.onCreated(function () {
       });
     }
   });
+
+  this.subscribe('livechat:FAQItems', visitor.getToken());
 });

@@ -3,7 +3,14 @@
 
   <ul>
     {{#each faqItems}}
-      <li><a href="{{url}}">{{text}}</a></li>
+      <li><a href="{{url}}">{{text}}</a>
+      {{#if message}}
+        -
+        <strong>
+            {{message}}{{#if item.truncated}}&hellip;{{/if}}
+        </strong>
+      {{/if}}
+      </li>
     {{/each}}
   </ul>
 </template>
