@@ -172,4 +172,11 @@ Meteor.startup(function() {
 		i18nLabel: 'Solr URL',
 		i18nDescription: 'Specify the full URL of the Solr query. {{QUERY}} will be replaced by the actual search query.'
 	});
+
+	RocketChat.settings.add('Livechat_enable_office_hours', false, {
+		type: 'boolean',
+		group: 'Livechat',
+		public: true,
+		i18nLabel: 'Office_Hours_Enabled'
+	});
 });
