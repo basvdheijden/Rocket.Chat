@@ -164,4 +164,12 @@ Meteor.startup(function() {
 		public: true,
 		i18nLabel: 'Show_queue_list_to_all_agents'
 	});
+
+	RocketChat.settings.add('Livechat_solrUrl', '', {
+		type: 'string',
+		group: 'Livechat',
+		public: true,
+		i18nLabel: 'Solr URL',
+		i18nDescription: 'Specify the full URL of the Solr query. {{QUERY}} will be replaced by the actual search query.'
+	});
 });

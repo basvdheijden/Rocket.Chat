@@ -8,20 +8,14 @@ class FAQItems extends RocketChat.models._Base {
   }
 
   query(keywords) {
-    return [
-      { url: 'http://kip2.nl/', text: keywords[0] + ' 1 (' + new Date() + ' )' },
-      { url: 'http://kip.2nl/', text: keywords[0] + ' 2 (' + new Date() + ' )' },
-      { url: 'http://kip2.l/', text: keywords[0] + '  3 (' + new Date() + ' )' }
-    ];
+    return RocketChat.Solr.getResults(keywords);
   }
 
   keywords(message) {
-    return [message, 'kip', 'ei', new Date()];
+    return RocketChat.Keywords.getKeywords(message);
   }
 
   set(items, token, message, room) {
-    if (!items.length) return;
-
     items.forEach(function(item) {
       var faqItem = {
         text: item.text,

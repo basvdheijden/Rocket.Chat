@@ -3,8 +3,9 @@ Meteor.methods({
     var keywords = RocketChat.models.FAQItems.keywords(message);
     var items = RocketChat.models.FAQItems.query(keywords);
 
+    RocketChat.models.FAQItems.remove({visitor: token});
+
     if (items) {
-      RocketChat.models.FAQItems.remove({visitor: token});
       RocketChat.models.FAQItems.set(items, token);
     }
 

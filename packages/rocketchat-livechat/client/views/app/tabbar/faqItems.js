@@ -15,7 +15,7 @@ Template.faqItems.helpers({
         item.truncated = false;
 
         if (message.msg.length > 20) {
-          message.msg = message.msg.substr(0, 20);
+          message.msg = message.msg.substr(0, 20) + '...';
           item.truncated = true;
         }
 

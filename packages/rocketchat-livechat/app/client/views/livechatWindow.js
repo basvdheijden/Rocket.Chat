@@ -46,6 +46,11 @@ Template.livechatWindow.helpers({
       msgid: null
     }).count();
   },
+  hasFAQ() {
+    return FAQItems.find({
+      msgid: null
+    }).count();
+  },
   chatting() {
     return Livechat.online && (visitor.getRoom() !== null || Session.get('chatInitialized'));
   }

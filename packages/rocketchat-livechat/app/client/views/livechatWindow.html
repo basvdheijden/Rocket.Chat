@@ -29,7 +29,9 @@
         {{/if}}
       {{else}}
         {{#if questionAsked}}
-          <h2>Staat uw vraag er niet bij?</h2>
+          {{#if hasFAQ}}
+            <h2>Staat uw vraag er niet bij?</h2>
+          {{/if}}
           {{#if livechatOnline}}
             <a class="init-chat" href="#">Chat met een medewerker</a>
           {{/if}}
@@ -40,8 +42,6 @@
 
         {{> questionForm}}
       {{/if}}
-
-      {{> poweredBy }}
     </div>
   {{/if}}
 </template>

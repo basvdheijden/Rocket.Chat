@@ -15,6 +15,13 @@ Package.registerBuildPlugin({
   }
 });
 
+Npm.depends({
+  'nlcst-to-string': '2.0.0',
+  'retext': '2.0.0',
+  'retext-dutch': '2.0.0',
+  'retext-keywords': '2.0.2'
+});
+
 Package.onUse(function (api) {
   api.versionsFrom('1.0');
 
@@ -170,6 +177,8 @@ Package.onUse(function (api) {
   // server lib
   api.addFiles('server/lib/Livechat.js', 'server');
   api.addFiles('server/lib/QueueMethods.js', 'server');
+  api.addFiles('server/lib/Keywords.js', 'server');
+  api.addFiles('server/lib/Solr.js', 'server');
 
   api.addFiles('server/sendMessageBySMS.js', 'server');
   api.addFiles('server/forwardUnclosedLivechats.js', 'server');
